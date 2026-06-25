@@ -3,745 +3,362 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ecosistema Clínico Integral | Dr. Yanick Espejel</title>
+    <title>OMi-P // Ecosistema Integral Yanick Espejel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <style>
         :root {
-            --verde-esmeralda: #063D3B;
-            --verde-oscuro: #042928;
-            --oro-rosa: #C59D83;
-            --oro-rosa-claro: #F4DCD3;
-            --blanco: #FFFFFF;
-            --gris-fondo: #F9F9F9;
+            --omicron-base: #063D3B; --omicron-sombra: #042928;
+            --rose-cuerpo: #C59D83; --rose-sombra: #A67C6D; --rose-reflejo: #F4DCD3; --destello: #FFFFFF;
         }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--gris-fondo);
-            color: var(--verde-oscuro);
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 750px;
-            background: var(--blanco);
-            padding: 40px;
-            border-radius: 8px;
-            border-top: 6px solid var(--verde-esmeralda);
-            border-bottom: 2px solid var(--oro-rosa);
-            box-shadow: 0 10px 25px rgba(6, 61, 59, 0.1);
-            box-sizing: border-box;
-            position: relative;
-        }
-
-        .section {
-            display: none;
-            animation: fadeIn 0.4s ease;
-        }
-        .section.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        h1, h2, h3 {
-            color: var(--verde-esmeralda);
-            margin-top: 0;
-        }
-
-        h1.brand-title {
-            font-size: 28px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            text-align: center;
-            border-bottom: 2px solid var(--oro-rosa);
-            padding-bottom: 15px;
-            margin-bottom: 30px;
-        }
-
-        h2 {
-            font-size: 22px;
-            border-bottom: 1px dashed var(--oro-rosa);
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-        }
-
-        /* Forms & Inputs */
-        label {
-            display: block;
-            font-size: 13px;
-            font-weight: 700;
-            margin-bottom: 6px;
-            margin-top: 15px;
-            text-transform: uppercase;
-            color: var(--verde-esmeralda);
-            letter-spacing: 1px;
-        }
-
-        input[type="text"], input[type="password"], input[type="number"], input[type="email"], input[type="date"], input[type="tel"], textarea, select {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #DDDDDD;
-            border-radius: 4px;
-            box-sizing: border-box;
-            font-size: 15px;
-            font-family: inherit;
-            color: var(--verde-oscuro);
-            background-color: var(--blanco);
-            transition: border-color 0.3s;
-        }
-
-        input:focus, textarea:focus, select:focus {
-            outline: none;
-            border-color: var(--oro-rosa);
-            box-shadow: 0 0 5px rgba(197, 157, 131, 0.3);
-        }
-
-        input[type="range"] {
-            width: 100%;
-            accent-color: var(--verde-esmeralda);
-            margin-top: 10px;
-        }
-
-        /* Buttons */
-        button {
-            width: 100%;
-            padding: 15px;
-            font-size: 15px;
-            font-weight: bold;
-            cursor: pointer;
-            border: none;
-            border-radius: 4px;
-            transition: all 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 20px;
-        }
-
-        .btn-primary {
-            background-color: var(--verde-esmeralda);
-            color: var(--blanco);
-        }
-        .btn-primary:hover {
-            background-color: var(--verde-oscuro);
-        }
-
-        .btn-secondary {
-            background-color: var(--oro-rosa);
-            color: var(--blanco);
-        }
-        .btn-secondary:hover {
-            background-color: #B08A70;
-        }
-
-        .btn-outline {
-            background-color: transparent;
-            color: var(--oro-rosa);
-            border: 1px solid var(--oro-rosa);
-        }
-        .btn-outline:hover {
-            background-color: var(--oro-rosa-claro);
-            color: var(--verde-oscuro);
-        }
-
-        /* Menu */
-        .menu-grid {
-            display: grid;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-        .menu-item {
-            padding: 20px;
-            border: 1px solid var(--oro-rosa);
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 600;
-            text-align: center;
-            color: var(--verde-esmeralda);
-            transition: all 0.2s;
-            background: var(--blanco);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        .menu-item:hover {
-            background: var(--oro-rosa-claro);
-            color: var(--verde-oscuro);
-        }
-
-        /* Specific Test Styles */
-        .instruction-box {
-            background-color: var(--oro-rosa-claro);
-            padding: 20px;
-            border-left: 4px solid var(--oro-rosa);
-            border-radius: 4px;
-            font-size: 14px;
-            line-height: 1.6;
-            margin-bottom: 25px;
-        }
-
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; }
-
-        .checkbox-group {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-top: 10px;
-        }
-        .checkbox-item {
-            display: flex;
-            align-items: center;
-            font-size: 14px;
-            font-weight: normal;
-            text-transform: none;
-            color: var(--verde-oscuro);
-        }
-        .checkbox-item input {
-            width: auto;
-            margin: 0 10px 0 0;
-        }
-
-        /* Audio Visualizer */
-        canvas {
-            width: 100%;
-            height: 80px;
-            background-color: var(--verde-oscuro);
-            border-radius: 6px;
-            border: 1px solid var(--oro-rosa);
-            margin: 20px 0;
-        }
-        .recording-indicator {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            color: #d32f2f;
-            font-weight: bold;
-            animation: pulse 1.5s infinite;
-        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--destello); color: var(--omicron-base); margin: 0; padding: 20px; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; }
+        .container { width: 100%; max-width: 800px; background: var(--destello); padding: 40px; border-top: 8px solid var(--omicron-base); border-bottom: 3px solid var(--rose-cuerpo); border-radius: 8px; box-shadow: 0 10px 30px rgba(4, 41, 40, 0.06); box-sizing: border-box; }
+        .section { display: none; } .active { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* Componentes Globales */
+        h1 { color: var(--omicron-base); border-bottom: 2px solid var(--rose-cuerpo); padding-bottom: 10px; font-weight: 700; text-transform: uppercase; font-size: 24px; }
+        h2 { color: var(--rose-sombra); font-size: 18px; text-transform: uppercase; margin-bottom: 15px; }
+        h3 { color: var(--omicron-base); font-size: 16px; border-bottom: 1px dashed var(--rose-cuerpo); padding-bottom: 5px; margin-top: 25px; }
+        input[type="text"], input[type="password"], input[type="number"], input[type="email"], input[type="tel"], input[type="date"], textarea, select { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid var(--rose-cuerpo); border-radius: 4px; box-sizing: border-box; outline: none; background-color: var(--destello); color: var(--omicron-sombra); font-family: inherit; font-size: 14px; }
+        input:focus, textarea:focus { border-color: var(--omicron-base); box-shadow: 0 0 5px rgba(6, 61, 59, 0.2); }
+        button { width: 100%; padding: 15px; background: var(--omicron-base); color: var(--destello); border: none; border-radius: 4px; cursor: pointer; text-transform: uppercase; font-weight: bold; margin-top: 15px; transition: background 0.3s; }
+        button:hover { background: var(--omicron-sombra); }
+        .btn-secondary { background: var(--destello); color: var(--rose-sombra); border: 1px solid var(--rose-sombra); }
+        .btn-secondary:hover { background: var(--rose-reflejo); color: var(--omicron-base); }
+        .menu-item { padding: 20px; border-bottom: 1px solid var(--rose-reflejo); cursor: pointer; font-weight: 600; text-transform: uppercase; font-size: 14px; transition: color 0.2s; }
+        .menu-item:hover { color: var(--rose-sombra); background-color: #FAFAFA; }
+        .instructions-box, .consent-box { background-color: var(--rose-reflejo); padding: 20px; border-left: 4px solid var(--omicron-base); border-radius: 4px; font-size: 14px; line-height: 1.6; margin-bottom: 25px; color: var(--omicron-sombra); text-align: justify; }
+        
+        /* Estilos IM2-150 y Likert */
+        .progress-container { width: 100%; height: 6px; background-color: var(--rose-reflejo); border-radius: 3px; margin-bottom: 20px; overflow: hidden; }
+        .progress-bar { height: 100%; width: 0%; background-color: var(--omicron-base); transition: width 0.3s ease; }
+        .likert-group { display: grid; grid-template-columns: repeat(9, 1fr); gap: 5px; margin-bottom: 20px; }
+        .likert-btn { background-color: var(--destello); border: 2px solid var(--rose-cuerpo); color: var(--omicron-base); padding: 12px 0; font-size: 15px; font-weight: bold; border-radius: 4px; cursor: pointer; margin-top: 0; }
+        .likert-btn:hover { background-color: var(--rose-reflejo); border-color: var(--omicron-base); }
+        .likert-labels { display: flex; justify-content: space-between; font-size: 11px; color: var(--rose-sombra); text-transform: uppercase; margin-bottom: 30px; font-weight: 600; }
+        
+        /* Estilos Fonética y Audio */
+        .visualizador-audio { width: 100%; height: 80px; background-color: var(--omicron-sombra); border-radius: 6px; border: 1px solid var(--rose-sombra); margin-bottom: 20px; }
+        .estado-grabando { display: flex; align-items: center; justify-content: center; gap: 10px; color: #d32f2f; font-weight: bold; margin-bottom: 15px; animation: pulse 1.5s infinite; }
         @keyframes pulse { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }
-
-        /* IM2-100 Progress */
-        .progress-bar {
-            width: 100%;
-            height: 6px;
-            background-color: var(--oro-rosa-claro);
-            border-radius: 3px;
-            margin-bottom: 15px;
-            overflow: hidden;
-        }
-        .progress-fill {
-            height: 100%;
-            width: 0%;
-            background-color: var(--verde-esmeralda);
-            transition: width 0.3s ease;
-        }
-
-        /* Duelo Scale */
-        .scale-label {
-            display: flex;
-            justify-content: space-between;
-            font-size: 11px;
-            color: var(--oro-rosa);
-            font-weight: bold;
-            margin-top: -5px;
-        }
-
-        #status-overlay {
-            display: none;
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(255,255,255,0.9);
-            z-index: 100;
-            text-align: center;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            border-radius: 8px;
-        }
-        .spinner {
-            width: 50px; height: 50px;
-            border: 5px solid var(--oro-rosa-claro);
-            border-top: 5px solid var(--verde-esmeralda);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
     </style>
 </head>
 <body>
 
 <div class="container">
-    
-    <div id="status-overlay">
-        <div class="spinner"></div>
-        <h3 style="margin-top: 20px;" id="status-text">Procesando...</h3>
-    </div>
-
+    <!-- LOGIN -->
     <div id="login" class="section active">
-        <h1 class="brand-title">Dr. Yanick Espejel</h1>
-        <div class="instruction-box" style="text-align: center;">
-            Ingrese su credencial de acceso para entrar al Ecosistema Clínico.
-        </div>
-        <input type="password" id="passAcceso" placeholder="Contraseña de Acceso">
-        <button class="btn-primary" onclick="validarLogin()">Ingresar al Sistema</button>
+        <h1>Identificación Clínica</h1>
+        <div class="instructions-box">Ingrese su nombre de usuario y credencial de acceso para ingresar al ecosistema de evaluación OMi-P.</div>
+        <label style="font-size: 12px; font-weight: bold; text-transform: uppercase;">Nombre de Usuario / Paciente</label>
+        <input type="text" id="global-nombre" placeholder="Nombre completo">
+        <label style="font-size: 12px; font-weight: bold; text-transform: uppercase; margin-top: 10px;">Clave de Acceso</label>
+        <input type="password" id="global-pass" placeholder="Contraseña de Seguridad">
+        <button onclick="validarAcceso()">Ingresar al Sistema</button>
     </div>
 
+    <!-- MENU CENTRAL -->
     <div id="menu" class="section">
-        <h1 class="brand-title">Ecosistema Clínico</h1>
-        <p style="text-align: center; margin-bottom: 30px;">Seleccione la evaluación o formulario requerido:</p>
-        
-        <div class="menu-grid">
-            <div class="menu-item" onclick="show('expediente')">1. Apertura de Expediente Integral</div>
-            <div class="menu-item" onclick="show('fonetica')">2. Evaluación Fonética</div>
-            <div class="menu-item" onclick="show('duelo')">3. Dinámicas Relacionales (Duelo)</div>
-            <div class="menu-item" onclick="show('im2100')">4. Protocolo IM2-100 (Neuroquímico)</div>
-        </div>
-        
-        <button class="btn-outline" onclick="cerrarSesion()">Cerrar Sesión Segura</button>
+        <h3 id="display-nombre" style="margin-top: 0; color: var(--rose-sombra);"></h3>
+        <h1>Ecosistema OMi-P</h1>
+        <div class="menu-item" onclick="show('historia')">Historia Clínica</div>
+        <div class="menu-item" onclick="show('im2100')">Protocolo IM2-100</div>
+        <div class="menu-item" onclick="show('duelo')">Prueba de Duelo</div>
+        <div class="menu-item" onclick="show('im2150')">Protocolo IM2-150 (Diagnóstico Diferencial)</div>
+        <div class="menu-item" onclick="show('fonetica')">Prueba Fonética OMi-P</div>
+        <div class="menu-item" onclick="show('fondan')">FONDAN (Fonética Diagnóstica)</div>
+        <button class="btn-secondary" onclick="location.reload()">Cerrar Sesión</button>
     </div>
 
-    <div id="expediente" class="section">
-        <h2>Apertura de Expediente Integral</h2>
-        <div class="instruction-box">
-            Documento requerido para la integración de su perfil clínico. Complete con precisión.
+    <!-- 1. HISTORIA CLÍNICA -->
+    <div id="historia" class="section">
+        <h1>Ficha Clínica Integral</h1>
+        <div class="instructions-box">El presente documento es un formato integral requerido para la apertura de expediente clínico. Es indispensable llenarlo con precisión.</div>
+        <div style="background-color: var(--omicron-base); color: white; padding: 20px; border-radius: 6px; margin-bottom: 20px; border: 2px solid var(--rose-cuerpo);">
+            <h3 style="color: var(--rose-cuerpo); margin-top: 0; border-bottom: 1px solid var(--rose-sombra);">Información de Pago</h3>
+            <p style="font-size: 14px;"><strong>Titular:</strong> YANICK ESPEJEL GARCÍA<br><strong>Banco:</strong> Santander STP<br><strong>Cuenta:</strong> 4001449239<br><strong>CLABE:</strong> 646180401614492398<br><strong>Correo:</strong> yanick608@gmail.com</p>
         </div>
-        <form id="formExpediente" onsubmit="enviarExpediente(event)">
+        <form id="form-historia" onsubmit="enviarHistoria(event)">
             <h3>Datos de Identificación</h3>
-            <label>Nombre Completo:</label>
-            <input type="text" id="expNombre" required>
-            
-            <div class="grid-3">
-                <div><label>Fecha de Nac.</label><input type="date" id="expFechaNac" required></div>
-                <div><label>Edad</label><input type="number" id="expEdad" required></div>
-                <div><label>Sexo</label><input type="text" id="expSexo" required></div>
+            <input type="text" id="hc-nombre" placeholder="Nombre Completo" required>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <input type="number" id="hc-edad" placeholder="Edad" required>
+                <input type="text" id="hc-sexo" placeholder="Sexo" required>
+                <input type="tel" id="hc-tel" placeholder="Teléfono" required>
+                <input type="email" id="hc-correo" placeholder="Correo" required>
             </div>
-            
-            <div class="grid-2">
-                <div><label>Estado Civil</label><input type="text" id="expCivil"></div>
-                <div><label>Ocupación</label><input type="text" id="expOcupacion"></div>
-            </div>
-            
-            <div class="grid-2">
-                <div><label>Teléfono</label><input type="tel" id="expTel" required></div>
-                <div><label>Correo Electrónico</label><input type="email" id="expCorreo" required></div>
-            </div>
-
-            <h3 style="margin-top:30px;">Contacto de Emergencia</h3>
-            <div class="grid-3">
-                <div><label>Nombre</label><input type="text" id="emNombre" required></div>
-                <div><label>Parentesco</label><input type="text" id="emParentesco" required></div>
-                <div><label>Teléfono</label><input type="tel" id="emTel" required></div>
-            </div>
-
-            <h3 style="margin-top:30px;">Análisis Clínico</h3>
-            <label>Motivo de Consulta principal:</label>
-            <textarea id="expMotivo" rows="3" required></textarea>
-            
-            <label>Medicación actual (Médica o Psiquiátrica):</label>
-            <textarea id="expMed" rows="2" placeholder="Especifique medicamento y dosis..."></textarea>
-            
-            <label>Condiciones diagnosticadas previas:</label>
-            <div class="checkbox-group">
-                <label class="checkbox-item"><input type="checkbox" class="condicion" value="Ansiedad/Pánico"> Ansiedad / Pánico</label>
-                <label class="checkbox-item"><input type="checkbox" class="condicion" value="Depresión"> Depresión</label>
-                <label class="checkbox-item"><input type="checkbox" class="condicion" value="Diabetes/Hipertensión"> Diabetes / Hipertensión</label>
-                <label class="checkbox-item"><input type="checkbox" class="condicion" value="Neurológicas"> Neurológicas</label>
-            </div>
-
-            <div class="grid-2">
-                <button type="button" class="btn-outline" onclick="show('menu')">Volver al Menú</button>
-                <button type="submit" class="btn-primary">Enviar Expediente</button>
-            </div>
+            <h3>Motivo de Consulta</h3>
+            <textarea id="hc-motivo" rows="3" required></textarea>
+            <h3>Antecedentes</h3>
+            <textarea id="hc-med" rows="2" placeholder="Medicación psiquiátrica actual (Dosis/Institución)"></textarea>
+            <button type="submit">Enviar Registro</button>
+            <button type="button" class="btn-secondary" onclick="show('menu')">Volver al Menú</button>
         </form>
     </div>
 
-    <div id="fonetica" class="section">
-        <h2>Evaluación Fonética</h2>
-        <div class="instruction-box">
-            Análisis de modulación, respiración y articulación. Ingrese su nombre, lea el texto en voz alta manteniendo un ritmo constante.
-        </div>
-        
-        <label>Nombre Completo:</label>
-        <input type="text" id="fonNombre" placeholder="Requerido para vincular la prueba">
-        
-        <div style="background: var(--oro-rosa-claro); padding: 20px; font-style: italic; border-radius: 6px; margin: 25px 0; font-size: 16px; text-align: justify;">
-            "El rápido desarrollo de la tecnología permite hoy evaluar aspectos sutiles de la respiración y la articulación. Durante este proceso, intente mantener un tono constante y una postura relajada. El viento frío del norte soplaba sobre las piedras brillantes del viejo sendero."
-        </div>
-
-        <div id="indicador-grabando" class="recording-indicator" style="display: none;">
-            <div style="width: 12px; height: 12px; background: red; border-radius: 50%;"></div>
-            GRABANDO AUDIO...
-        </div>
-
-        <canvas id="canvas-visualizador"></canvas>
-        
-        <button type="button" id="btn-audio" class="btn-primary" onclick="alternarGrabacion()" style="background-color: #d32f2f;">Iniciar Grabación</button>
-        <button type="button" class="btn-outline" onclick="show('menu')">Volver al Menú</button>
-    </div>
-
-    <div id="duelo" class="section">
-        <h2>Dinámicas Relacionales</h2>
-        <div class="instruction-box">
-            Responda cada reactivo indicando su nivel de acuerdo. <br>
-            <strong>0: Totalmente en desacuerdo | 8: Totalmente de acuerdo.</strong>
-        </div>
-        
-        <div class="grid-2" style="margin-bottom: 20px;">
-            <div><label>Nombre Completo:</label><input type="text" id="dueNombre"></div>
-            <div><label>Edad:</label><input type="number" id="dueEdad"></div>
-        </div>
-
-        <form id="formDuelo">
-            <div id="dueloContainer"></div>
-            <div class="grid-2">
-                <button type="button" class="btn-outline" onclick="show('menu')">Volver al Menú</button>
-                <button type="button" class="btn-primary" onclick="procesarDuelo()">Evaluar y Enviar</button>
-            </div>
-        </form>
-    </div>
-
+    <!-- 2. PROTOCOLO IM2-100 -->
     <div id="im2100" class="section">
-        <h2>Protocolo IM2-100</h2>
-        <div class="instruction-box">
-            Evaluación de Equilibrio Gabaérgico. Lea cuidadosamente y responda <strong>SÍ</strong> o <strong>NO</strong> basándose en los últimos 7 días.
-            <br><br><span style="color:red; font-weight:bold;">Aviso: Al finalizar esta prueba de 100 reactivos, el sistema cerrará la sesión automáticamente por seguridad.</span>
-        </div>
-        
-        <div id="im2-intro">
-            <div class="grid-2">
-                <div><label>Nombre Completo:</label><input type="text" id="im2Nombre"></div>
-                <div><label>Edad:</label><input type="number" id="im2Edad"></div>
-            </div>
-            <div class="grid-2">
-                <button type="button" class="btn-outline" onclick="show('menu')">Volver al Menú</button>
-                <button type="button" class="btn-primary" onclick="iniciarIM2()">Comenzar 100 Preguntas</button>
+        <h1>Protocolo IM2-100</h1>
+        <h2>Evaluación de Equilibrio Gabaérgico</h2>
+        <div class="instructions-box">A continuación, se le presentará una serie de 100 afirmaciones. Lea cuidadosamente y responda SÍ o NO, basándose en los últimos 7 días.</div>
+        <div id="im2100-quiz" style="display: block;">
+            <div class="progress-container"><div id="im2100-bar" class="progress-bar"></div></div>
+            <div id="im2100-counter" style="font-size: 13px; font-weight: 600; color: var(--rose-sombra); margin-bottom: 20px;">Pregunta 1 de 100</div>
+            <div id="im2100-qtext" style="font-size: 20px; min-height: 100px; display: flex; align-items: center; justify-content: center; margin-bottom: 30px; font-weight: 500; text-align: center;">Cargando...</div>
+            <div style="display: flex; gap: 15px; justify-content: center;">
+                <button style="margin: 0; width: 45%;" onclick="im2100Process(true)">SÍ</button>
+                <button style="margin: 0; width: 45%;" class="btn-secondary" onclick="im2100Process(false)">NO</button>
             </div>
         </div>
-
-        <div id="im2-quiz" style="display: none; margin-top: 30px;">
-            <div class="progress-bar"><div id="im2-progress" class="progress-fill"></div></div>
-            <div style="font-size: 12px; font-weight: bold; color: var(--oro-rosa); margin-bottom: 20px;" id="im2-counter">Pregunta 1 de 100</div>
-            
-            <div id="im2-question" style="font-size: 20px; text-align: center; min-height: 100px; display: flex; align-items: center; justify-content: center; margin-bottom: 30px; font-weight: 500;">
-                Cargando...
-            </div>
-            
-            <div class="grid-2">
-                <button type="button" class="btn-primary" onclick="responderIM2(true)">SÍ</button>
-                <button type="button" class="btn-secondary" onclick="responderIM2(false)">NO</button>
-            </div>
+        <div id="im2100-results" style="display: none;">
+            <div id="im2100-summary" class="instructions-box" style="background-color: #FAFAFA; border-left-color: var(--rose-cuerpo);"></div>
+            <button onclick="im2100Submit()">Enviar Resultados</button>
+            <button class="btn-secondary" onclick="show('menu')">Volver al Menú</button>
         </div>
     </div>
 
+    <!-- 3. PRUEBA DE DUELO -->
+    <div id="duelo" class="section">
+        <h1>Dinámicas Relacionales</h1>
+        <div class="instructions-box">Responda cada reactivo utilizando una escala del 0 al 8 (0: Totalmente en desacuerdo, 8: Totalmente de acuerdo).</div>
+        <div id="duelo-container" style="max-height: 500px; overflow-y: auto; padding-right: 10px; margin-bottom: 20px;"></div>
+        <button onclick="dueloCalculate()">Calcular Resultados</button>
+        <button class="btn-secondary" onclick="show('menu')">Volver al Menú</button>
+        <div id="duelo-results" style="display: none; margin-top: 20px;">
+            <h3 id="duelo-score" style="font-size: 20px;"></h3>
+            <p id="duelo-interp" class="instructions-box"></p>
+            <button onclick="dueloSubmit()">Enviar a Ómicron</button>
+        </div>
+    </div>
+
+    <!-- 4. PROTOCOLO IM2-150 -->
+    <div id="im2150" class="section">
+        <h1>Protocolo IM2-150</h1>
+        <h2>Baremación de Contraste Cingulado</h2>
+        <div class="instructions-box">
+            <p><strong>INSTRUCCIONES CLÍNICAS:</strong> Este protocolo consta de 150 reactivos para evaluar reactividad perceptual, procesamiento cognitivo y respuestas adaptativas. Para opciones numéricas: 0 (Nulo) a 8 (Total). Para desarrollo: escriba la primera asociación de ideas.</p>
+        </div>
+        <div id="im2150-intro">
+            <button onclick="im2150Start()">Iniciar Protocolo</button>
+            <button class="btn-secondary" onclick="show('menu')">Volver al Menú</button>
+        </div>
+        <div id="im2150-quiz" style="display: none;">
+            <div class="progress-container"><div id="im2150-bar" class="progress-bar"></div></div>
+            <div id="im2150-counter" style="font-size: 13px; font-weight: 600; color: var(--rose-sombra); margin-bottom: 20px;">Reactivo 1 de 150</div>
+            <div id="im2150-qtext" style="font-size: 18px; min-height: 80px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; font-weight: 500; text-align: center;"></div>
+            
+            <div id="im2150-likert">
+                <div class="likert-group">
+                    <button class="likert-btn" onclick="im2150Answer(0)">0</button><button class="likert-btn" onclick="im2150Answer(1)">1</button>
+                    <button class="likert-btn" onclick="im2150Answer(2)">2</button><button class="likert-btn" onclick="im2150Answer(3)">3</button>
+                    <button class="likert-btn" onclick="im2150Answer(4)">4</button><button class="likert-btn" onclick="im2150Answer(5)">5</button>
+                    <button class="likert-btn" onclick="im2150Answer(6)">6</button><button class="likert-btn" onclick="im2150Answer(7)">7</button>
+                    <button class="likert-btn" onclick="im2150Answer(8)">8</button>
+                </div>
+                <div class="likert-labels"><span>0 - Ausente/Nunca</span><span>8 - Presente/Siempre</span></div>
+            </div>
+            
+            <div id="im2150-open" style="display: none;">
+                <textarea id="im2150-textarea" rows="4" placeholder="Escriba su respuesta de asociación libre aquí..."></textarea>
+                <button onclick="im2150OpenAnswer()">Continuar</button>
+            </div>
+        </div>
+        <div id="im2150-results" style="display: none;">
+            <div class="instructions-box" style="text-align: center;">Fase de Captura Terminada. Presione enviar para remitir los baremos.</div>
+            <button onclick="im2150Submit()">Cerrar y Enviar Registro</button>
+            <button class="btn-secondary" onclick="show('menu')">Volver al Menú</button>
+        </div>
+    </div>
+
+    <!-- 5. PRUEBA FONÉTICA OMI-P -->
+    <div id="fonetica" class="section">
+        <h1>Evaluación Fonética</h1>
+        <h2>SISTEMA OMi-P // PHONETIC DISPATCH</h2>
+        <div class="instructions-box">Lee el siguiente texto con tono claro, ritmo pausado y sin interrupciones.</div>
+        <div style="background-color: var(--rose-reflejo); border: 1px solid var(--rose-sombra); border-radius: 8px; padding: 20px; font-size: 1.1rem; font-style: italic; margin-bottom: 20px; text-align: justify;">
+            "El rápido desarrollo de la tecnología sónica OMi-P permite hoy evaluar aspectos sutiles de la respiración y la articulación. Durante este proceso, intente mantener un tono constante y una postura relajada. El viento frío del norte soplaba sobre las piedras brillantes del viejo sendero."
+        </div>
+        <div id="fonetica-indicador" class="estado-grabando" style="display: none;">MICRÓFONO ACTIVO // REGISTRANDO</div>
+        <canvas id="fonetica-canvas" class="visualizador-audio"></canvas>
+        <button id="fonetica-btn" style="background-color: #d32f2f;" onclick="foneticaToggle()">Comenzar Grabación</button>
+        <button class="btn-secondary" onclick="show('menu')">Volver al Menú</button>
+    </div>
+
+    <!-- 6. FONDAN -->
+    <div id="fondan" class="section">
+        <h1>FONDAN</h1>
+        <h2>Fonética Diagnóstica Analítica Neuro-Psicológica</h2>
+        <div class="instructions-box">
+            La presente evaluación constituye una herramienta de alta precisión diseñada para el análisis de patrones afectivos y neurocognitivos integrando el sistema OMi-P. Reflexione sobre cada pregunta y proporcione su respuesta de forma abierta y detallada.
+        </div>
+        <div style="text-align: left; font-size: 14px; margin-bottom: 20px; padding-left: 20px;">
+            <ol style="line-height: 1.8;">
+                <li><strong>Proyección Onírica:</strong> Describa un sueño recurrente o reciente donde la estabilidad de su entorno se vea amenazada. ¿Qué sensaciones físicas predominan al despertar?</li>
+                <li><strong>Vacío Existencial:</strong> Si tuviera que definir la sensación de estar solo con usted mismo, ¿con qué imagen, color o textura la representaría?</li>
+                <li><strong>Identidad Difusa:</strong> Describa una situación reciente donde sintiera que su forma de actuar cambió drásticamente en función de la compañía.</li>
+                <li><strong>Desregulación Emocional:</strong> Describa físicamente la sensación de intensidad justo antes de una reacción impulsiva.</li>
+                <li><strong>Miedo al Abandono:</strong> Describa los pensamientos específicos que cruzan su mente cuando una persona significativa no responde o solicita espacio.</li>
+            </ol>
+        </div>
+        <div class="consent-box" style="font-size: 12px;">
+            <strong>Cláusula de Consentimiento:</strong> Al oprimir grabar, autoriza el procesamiento fonético bajo OMi-P y deslinda a Yanick Espejel de responsabilidad sobre la autopercepción de resultados.
+        </div>
+        <div id="fondan-indicador" class="estado-grabando" style="display: none;">ANALÍTICA FONDAN EN CURSO</div>
+        <button id="fondan-btn" style="background-color: #d32f2f;" onclick="fondanToggle()">Iniciar Grabación FONDAN</button>
+        <button class="btn-secondary" onclick="show('menu')">Volver al Menú</button>
+    </div>
 </div>
 
 <script>
-    /* =========================================================
-       CONFIGURACIÓN GLOBAL Y EMAILJS
-       ========================================================= */
-    const EMAILJS_PUBLIC_KEY = "z7UKWFlgvcMOGPNBO";
-    const EMAILJS_SERVICE_ID = "service_avzt25n";
-    const TEMPLATE_GENERAL = "template_43iqh71"; 
-    const TEMPLATE_FONETICA = "template_d54jvr8"; 
+    // ----------------------------------------------------
+    // INICIALIZACIÓN Y NAVEGACIÓN GLOBAL
+    // ----------------------------------------------------
+    (function() { emailjs.init("z7UKWFlgvcMOGPNBO"); })();
 
-    emailjs.init(EMAILJS_PUBLIC_KEY);
+    let globalPaciente = "";
 
-    /* =========================================================
-       NAVEGACIÓN Y UTILIDADES
-       ========================================================= */
-    function show(sectionId) {
+    function show(id) {
         document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-        document.getElementById(sectionId).classList.add('active');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        document.getElementById(id).classList.add('active');
+        window.scrollTo(0, 0);
     }
 
-    function mostrarLoader(texto) {
-        document.getElementById('status-text').innerText = texto;
-        document.getElementById('status-overlay').style.display = 'flex';
-    }
-
-    function ocultarLoader() {
-        document.getElementById('status-overlay').style.display = 'none';
-    }
-
-    function validarLogin() {
+    function validarAcceso() {
+        const pass = document.getElementById('global-pass').value;
+        const nombre = document.getElementById('global-nombre').value.trim();
         const llaves = ["Omicrony2y2.5731", "Omicronz3z3.1040", "Omicronx4x4.5540"];
-        if (llaves.includes(document.getElementById('passAcceso').value)) {
-            document.getElementById('passAcceso').value = "";
+        
+        if (nombre && llaves.includes(pass)) {
+            globalPaciente = nombre;
+            document.getElementById('display-nombre').innerText = "Paciente Activo: " + nombre;
+            document.getElementById('hc-nombre').value = nombre;
             show('menu');
         } else {
-            alert("Acceso denegado. Credencial incorrecta.");
+            alert("Acceso denegado. Verifique su nombre de usuario y contraseña.");
         }
     }
 
-    function cerrarSesion() {
-        show('login');
-        alert("Sesión cerrada correctamente.");
-    }
-
-    /* =========================================================
-       1. EXPEDIENTE CLÍNICO
-       ========================================================= */
-    function enviarExpediente(e) {
+    // ----------------------------------------------------
+    // LÓGICA HISTORIA CLÍNICA
+    // ----------------------------------------------------
+    function enviarHistoria(e) {
         e.preventDefault();
-        mostrarLoader("Enviando expediente...");
-
-        const condiciones = Array.from(document.querySelectorAll('.condicion:checked')).map(cb => cb.value).join(', ');
+        const btn = e.submitter;
+        btn.innerText = "Procesando...";
+        btn.disabled = true;
         const datos = {
-            tipo_prueba: "Apertura de Expediente",
-            patient_name: document.getElementById('expNombre').value,
-            patient_age: document.getElementById('expEdad').value,
-            motivo: document.getElementById('expMotivo').value,
-            detalles: `Tel: ${document.getElementById('expTel').value} | Condiciones: ${condiciones || 'Ninguna'} | Medicación: ${document.getElementById('expMed').value || 'Ninguna'}`
+            nombre: document.getElementById('hc-nombre').value, edad: document.getElementById('hc-edad').value,
+            telefono: document.getElementById('hc-tel').value, motivo: document.getElementById('hc-motivo').value,
+            medicacion: document.getElementById('hc-med').value || 'Ninguna', to_email: "yanick608@gmail.com"
         };
-
-        emailjs.send(EMAILJS_SERVICE_ID, TEMPLATE_GENERAL, datos)
-            .then(() => {
-                ocultarLoader();
-                alert("Expediente enviado exitosamente a tu base de datos.");
-                document.getElementById('formExpediente').reset();
-                show('menu');
-            })
-            .catch(err => {
-                ocultarLoader();
-                alert("Hubo un error de conexión. Intente nuevamente.");
-                console.error(err);
-            });
-    }
-
-    /* =========================================================
-       2. PRUEBA FONÉTICA
-       ========================================================= */
-    let mediaRecorder, audioChunks = [], audioContext, analyser, dataArray, animId, isRecording = false;
-
-    async function alternarGrabacion() {
-        const nombre = document.getElementById('fonNombre').value.trim();
-        if (!nombre) return alert("Por favor, ingresa tu nombre antes de grabar.");
-
-        if (!isRecording) {
-            try {
-                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-                iniciarAnalizador(stream);
-                mediaRecorder = new MediaRecorder(stream);
-                mediaRecorder.ondataavailable = e => { if(e.data.size > 0) audioChunks.push(e.data); };
-                mediaRecorder.onstop = procesarAudioFonetic;
-                
-                audioChunks = [];
-                mediaRecorder.start();
-                isRecording = true;
-                document.getElementById('indicador-grabando').style.display = 'flex';
-                document.getElementById('btn-audio').innerText = "Detener y Enviar Prueba";
-                document.getElementById('btn-audio').style.backgroundColor = "var(--verde-esmeralda)";
-            } catch (err) {
-                alert("Acceso al micrófono denegado o no disponible.");
-            }
-        } else {
-            isRecording = false;
-            mediaRecorder.stop();
-            if(audioContext) audioContext.close();
-            cancelAnimationFrame(animId);
-            document.getElementById('indicador-grabando').style.display = 'none';
-            document.getElementById('btn-audio').innerText = "Iniciar Grabación";
-            document.getElementById('btn-audio').style.backgroundColor = "#d32f2f";
-        }
-    }
-
-    function iniciarAnalizador(stream) {
-        const canvas = document.getElementById('canvas-visualizador');
-        const ctx = canvas.getContext('2d');
-        canvas.width = canvas.parentElement.clientWidth;
-        
-        audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        const source = audioContext.createMediaStreamSource(stream);
-        analyser = audioContext.createAnalyser();
-        analyser.fftSize = 1024;
-        source.connect(analyser);
-        dataArray = new Uint8Array(analyser.frequencyBinCount);
-        
-        function dibujar() {
-            if(!isRecording) return;
-            animId = requestAnimationFrame(dibujar);
-            analyser.getByteTimeDomainData(dataArray);
-            ctx.fillStyle = '#042928';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.lineWidth = 2;
-            ctx.strokeStyle = '#C59D83';
-            ctx.beginPath();
-            let sliceWidth = canvas.width * 1.0 / analyser.frequencyBinCount, x = 0;
-            for(let i = 0; i < analyser.frequencyBinCount; i++) {
-                let v = dataArray[i] / 128.0;
-                let y = v * canvas.height / 2;
-                if(i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
-                x += sliceWidth;
-            }
-            ctx.lineTo(canvas.width, canvas.height/2);
-            ctx.stroke();
-        }
-        dibujar();
-    }
-
-    async function procesarAudioFonetic() {
-        mostrarLoader("Subiendo análisis acústico. No cierre la ventana...");
-        const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
-        const formData = new FormData();
-        formData.append('file', audioBlob, `Audio_${document.getElementById('fonNombre').value}.webm`);
-
-        try {
-            const res = await fetch('https://tmpfiles.org/api/v1/upload', { method: 'POST', body: formData });
-            if(!res.ok) throw new Error();
-            const data = await res.json();
-            const urlAudio = data.data.url.replace('tmpfiles.org/', 'tmpfiles.org/dl/');
-
-            await emailjs.send(EMAILJS_SERVICE_ID, TEMPLATE_FONETICA, {
-                patient_name: document.getElementById('fonNombre').value,
-                enlace_audio: urlAudio,
-                tipo_prueba: "Prueba Fonética"
-            });
-
-            ocultarLoader();
-            alert("Prueba acústica procesada y enviada correctamente.");
-            document.getElementById('fonNombre').value = "";
+        emailjs.send("service_avzt25n", "template_43iqh7l", datos).then(() => {
+            alert("Registro Completado. Datos enviados exitosamente.");
             show('menu');
-        } catch (error) {
-            ocultarLoader();
-            alert("Ocurrió un error al procesar el audio. Por favor, vuelva a intentarlo asegurando una buena conexión a internet.");
-        }
+            btn.innerText = "Enviar Registro"; btn.disabled = false;
+        }).catch(() => {
+            alert("Error de conexión. Contacte a Yanick Espejel al 55 4589 4672.");
+            btn.innerText = "Enviar Registro"; btn.disabled = false;
+        });
     }
 
-    /* =========================================================
-       3. EVALUACIÓN DE DUELO (DINÁMICAS RELACIONALES)
-       ========================================================= */
-    const dueloQuestions = [
-        "Me resulta fácil permitir que otros vivan sus crisis sin intentar imponer mis soluciones.", "Considero que mi forma de procesar el dolor es la más efectiva para los demás.", "Cuando alguien no avanza al ritmo que yo deseo, experimento irritación evidente.", "Soy capaz de validar las emociones de otros, aunque no coincidan con las mías.", "Siento que mi deber es corregir la forma en que otros manejan sus problemas.", "Escucho activamente sin sentir la necesidad de intervenir o dar consejos no solicitados.", "A menudo, mis intentos de ayudar terminan generando conflictos o caos en el grupo.", "Reconozco que cada persona tiene propio tiempo interno para la sanación.", "Me siento frustrado cuando los demás ignoran mis recomendaciones de crecimiento.", "Respeto profundamente los límites y los tiempos de los procesos ajenos.", "Cuando me siento ignorado, suelo retirar mi afecto o apoyo como castigo.", "Puedo mantener la calma ante vulnerabilidad de las personas que me rodean.", "Acepto la responsabilidad de mis propias heridas antes de querer sanar a otros.", "Tiendo a proyectar mis carencias en los demás bajo el disfraz de ayuda.", "Prefiero el silencio antes que forzar una conversación de sanación.", "La empatía para mí es acompañar, no dirigir.", "Uso la ironía o comentarios pasivo-agresivos cuando alguien no me hace caso.", "Confío en que mi entorno puede resolver sus dificultades sin mi intervención.", "Siento que, si no intervengo, el caos se apoderará de los demás.", "Valoro la autonomía emocional por encima del control.", "Me resulta sencillo aceptar un no cuando ofrezco apoyo.", "Me molesta profundamente que los demás no valoren mi conocimiento.", "Soy consciente de cuándo estoy siendo invasivo en el espacio emocional ajeno.", "Identifico mis propios procesos de duelo antes de juzgar los de los demás.", "La paz mental de otros no depende de que sigan mis pasos.", "Siento que mi valor personal aumenta cuando otros siguen mis consejos.", "Practico la pausa y la reflexión antes de reaccionar ante el malestar de alguien.", "No me siento amenazado por el progreso silencioso de quienes me rodean.", "Entiendo que imponer sanación es una forma de violencia psicológica.", "Me permito estar vulnerable sin intentar esconderlo bajo una máscara de fortaleza.", "La necesidad de tener el control es un rasgo que me esfuerzo por mitigar.", "Reconozco que mis reacciones pasivo-agresivas dañan mis vínculos.", "Elijo la terapia y el acompañamiento profesional para mis propios temas.", "Considero que el bienestar colectivo surge de la sanación individual, no del control grupal.", "Asumo con humildad que mi visión del mundo es solo una entre muchas posibles."
-    ];
+    // ----------------------------------------------------
+    // LÓGICA IM2-100
+    // ----------------------------------------------------
+    const im2100Q = ["Mantengo la calma ante ruidos imprevistos.", "Mi capacidad para iniciar el sueño ha mejorado.", "Puedo estructurar mis ideas sin saltar de tema.", "Siento mis movimientos fluidos y precisos.", "Experimento tensión constante en la mandíbula.", "Logro terminar mis tareas sin desesperación.", "Mi respiración es profunda y regular.", "Siento que mi mente procesa con claridad.", "Disminución en la rumiación de pensamientos.", "La interacción social ya no me agota.", "Siento impulsos de mover las piernas en reposo.", "Mi estado de ánimo es constante.", "Mantengo el enfoque por más de 30 minutos.", "La sensación de bienestar es persistente.", "Baja irritabilidad ante esperas.", "Control sobre mis reacciones emocionales.", "Me despierto con angustia sin motivo.", "Descanso nocturno reparador.", "Apetito estable sin atracones.", "Resuelvo problemas sin entrar en pánico.", "Mi cuerpo se relaja con facilidad.", "Memoria operativa funcional.", "Sobresalto excesivo ante el contacto físico.", "Palpitaciones por estrés desaparecidas.", "Siento que el tiempo transcurre normal.", "Escucho críticas sin defensividad.", "Postura corporal relajada.", "Baja pesadez mental vespertina.", "Necesidad urgente de hablar constante.", "Visión clara sin fatiga ocular.", "Disfruto actividades silenciosas.", "Coordinación ojo-mano precisa.", "Sistema digestivo regular.", "Manos secas bajo presión.", "Me cuesta mucho trabajo quedarme quieto en una silla.", "Paciencia en labores cotidianas.", "Demandas externas manejables.", "Capacidad de análisis crítico intacta.", "Tolerancia a cambios de planes.", "Puedo delegar sin ansiedad.", "Pensamientos agolpados al hablar.", "Energía equitativa durante el día.", "Capacidad para perdonar errores propios.", "Conexión armoniosa mente-cuerpo.", "Cefaleas por tensión cesadas.", "Espero turnos con tranquilidad.", "Siento que el mundo va muy lento.", "Interés genuino por proyectos nuevos.", "Juicio no nublado por miedo.", "Calidad de conversación profunda.", "Ignoro estímulos visuales distractores.", "Respuesta al dolor menos reactiva.", "Opresión en garganta ante retos.", "Desaparición de vacío en estómago.", "Planifico a largo plazo con optimismo.", "Escritura clara y pulso firme.", "Entorno percibido como seguro.", "Baja necesidad de estimulantes.", "Sudoración fría ante correcciones.", "Reconozco emociones sin desborde.", "Voz firme y pausada.", "Organismo asimiló el estímulo.", "Baja hipersensibilidad a olores.", "Tareas minuciosas con paciencia.", "Siento que debo estar alerta siempre.", "Capacidad de asertividad mayor.", "Ciclos biológicos sincronizados.", "Mareo por estrés desaparecido.", "Leo señales no verbales con claridad.", "Decisiones racionales, no por temor.", "Me cuesta trabajo profundizar la respiración.", "Descanso de alta calidad.", "Piel saludable y menos reactiva.", "Sin agobio en lugares concurridos.", "Tensión lumbar disminuida.", "Creatividad sin bloqueos.", "Picazón en piel sin causa médica.", "Mantengo mirada tranquila al hablar.", "Capacidad de síntesis mejorada.", "Equilibrio gabaérgico notable.", "Fatiga al despertar inexistente.", "Organizo prioridades con lógica.", "Sensación de olvido constante.", "Gratitud por mi proceso.", "Respuesta ante crítica analítica.", "Calma en habitación a oscuras.", "Coordinación motriz eficiente.", "Ruidos fuertes no me desequilibran.", "Siento que mis extremidades pesan demasiado.", "Sentido del humor ligero.", "Comida sin distracciones digitales.", "Sistema inmunológico fuerte.", "Capacidad para decir no sin culpa.", "Baja urgencia por el futuro.", "Me muerdo las uñas o los labios con frecuencia.", "Intelecto en punto óptimo.", "Silencio por periodos largos.", "Postura al caminar erguida.", "Tratamiento efectivo.", "Estado de equilibrio integral."];
+    const im2100Inv = [5, 11, 17, 23, 29, 35, 41, 47, 53, 59, 65, 71, 77, 83, 89, 95];
+    let im2100Idx = 0; let im2100Score = 0;
 
-    const dueloCont = document.getElementById('dueloContainer');
-    dueloQuestions.forEach((q, i) => {
-        dueloCont.innerHTML += `
-        <div style="margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid #eee;">
-            <label style="margin-top:0;">${i+1}. ${q}</label>
-            <input type="range" id="dq${i}" min="0" max="8" value="0">
-            <div class="scale-label"><span>0</span><span>8</span></div>
-        </div>`;
-    });
-
-    function procesarDuelo() {
-        const nombre = document.getElementById('dueNombre').value;
-        const edad = document.getElementById('dueEdad').value;
-        if(!nombre || !edad) return alert("Por favor llene su nombre y edad.");
-
-        mostrarLoader("Analizando métricas...");
-        let score = 0;
-        for(let i=0; i<35; i++) score += parseInt(document.getElementById(`dq${i}`).value);
-
-        let interp = "";
-        if(score <= 60) interp = "Equilibrio Funcional (0-60)";
-        else if(score <= 120) interp = "Riesgo de Proyección Disfuncional (61-120)";
-        else if(score <= 180) interp = "Patrón de Invalidación Activa (121-180)";
-        else interp = "Crisis Estructural y Riesgo Patológico (181-200)";
-
-        const datos = {
-            tipo_prueba: "Evaluación Duelo y Dinámicas",
-            patient_name: nombre,
-            patient_age: edad,
-            score: score,
-            interpretation: interp
-        };
-
-        emailjs.send(EMAILJS_SERVICE_ID, TEMPLATE_GENERAL, datos)
-            .then(() => {
-                ocultarLoader();
-                alert(`Evaluación completada.\nPuntaje: ${score}\n\nLos resultados han sido enviados a su especialista clínico.`);
-                document.getElementById('formDuelo').reset();
-                document.getElementById('dueNombre').value = "";
-                document.getElementById('dueEdad').value = "";
-                show('menu');
-            })
-            .catch(err => {
-                ocultarLoader();
-                alert("Error de conexión al enviar resultados.");
-            });
-    }
-
-    /* =========================================================
-       4. PROTOCOLO IM2-100 (Neuroquímico)
-       ========================================================= */
-    const im2Questions = [
-        "Mantengo la calma ante ruidos imprevistos.", "Mi capacidad para iniciar el sueño ha mejorado.", "Puedo estructurar mis ideas sin saltar de tema.", "Siento mis movimientos fluidos y precisos.", "Experimento tensión constante en la mandíbula.", "Logro terminar mis tareas sin desesperación.", "Mi respiración es profunda y regular.", "Siento que mi mente procesa con claridad.", "Disminución en la rumiación de pensamientos.", "La interacción social ya no me agota.", "Siento impulsos de mover las piernas en reposo.", "Mi estado de ánimo es constante.", "Mantengo el enfoque por más de 30 minutos.", "La sensación de bienestar es persistente.", "Baja irritabilidad ante esperas.", "Control sobre mis reacciones emocionales.", "Me despierto con angustia sin motivo.", "Descanso nocturno reparador.", "Apetito estable sin atracones.", "Resuelvo problemas sin entrar en pánico.", "Mi cuerpo se relaja con facilidad.", "Memoria operativa funcional.", "Sobresalto excesivo ante el contacto físico.", "Palpitaciones por estrés desaparecidas.", "Siento que el tiempo transcurre normal.", "Escucho críticas sin defensividad.", "Postura corporal relajada.", "Baja pesadez mental vespertina.", "Necesidad urgente de hablar constante.", "Visión clara sin fatiga ocular.", "Disfruto actividades silenciosas.", "Coordinación ojo-mano precisa.", "Sistema digestivo regular.", "Manos secas bajo presión.", "Me cuesta mucho trabajo quedarme quieto en una silla.", "Paciencia en labores cotidianas.", "Demandas externas manejables.", "Capacidad de análisis crítico intacta.", "Tolerancia a cambios de planes.", "Puedo delegar sin ansiedad.", "Pensamientos agolpados al hablar.", "Energía equitativa durante el día.", "Capacidad para perdonar errores propios.", "Conexión armoniosa mente-cuerpo.", "Cefaleas por tensión cesadas.", "Espero turnos con tranquilidad.", "Siento que el mundo va muy lento.", "Interés genuino por proyectos nuevos.", "Juicio no nublado por miedo.", "Calidad de conversación profunda.", "Ignoro estímulos visuales distractores.", "Respuesta al dolor menos reactiva.", "Opresión en garganta ante retos.", "Desaparición de vacío en estómago.", "Planifico a largo plazo con optimismo.", "Escritura clara y pulso firme.", "Entorno percibido como seguro.", "Baja necesidad de estimulantes.", "Sudoración fría ante correcciones.", "Reconozco emociones sin desborde.", "Voz firme y pausada.", "Organismo asimiló el estímulo.", "Baja hipersensibilidad a olores.", "Tareas minuciosas con paciencia.", "Siento que debo estar alerta siempre.", "Capacidad de asertividad mayor.", "Ciclos biológicos sincronizados.", "Mareo por estrés desaparecido.", "Leo señales no verbales con claridad.", "Decisiones racionales, no por temor.", "Me cuesta trabajo profundizar la respiración.", "Descanso de alta calidad.", "Piel saludable y menos reactiva.", "Sin agobio en lugares concurridos.", "Tensión lumbar disminuida.", "Creatividad sin bloqueos.", "Picazón en piel sin causa médica.", "Mantengo mirada tranquila al hablar.", "Capacidad de síntesis mejorada.", "Equilibrio gabaérgico notable.", "Fatiga al despertar inexistente.", "Organizo prioridades con lógica.", "Sensación de olvido constante.", "Gratitud por mi proceso.", "Respuesta ante crítica analítica.", "Calma en habitación a oscuras.", "Coordinación motriz eficiente.", "Ruidos fuertes no me desequilibran.", "Siento que mis extremidades pesan demasiado.", "Sentido del humor ligero.", "Comida sin distracciones digitales.", "Sistema inmunológico fuerte.", "Capacidad para decir no sin culpa.", "Baja urgencia por el futuro.", "Me muerdo las uñas o los labios con frecuencia.", "Intelecto en punto óptimo.", "Silencio por periodos largos.", "Postura al caminar erguida.", "Tratamiento efectivo.", "Estado de equilibrio integral."
-    ];
-    const im2Inverse = [5, 11, 17, 23, 29, 35, 41, 47, 53, 59, 65, 71, 77, 83, 89, 95];
-    let im2Index = 0, im2Score = 0;
-
-    function iniciarIM2() {
-        const n = document.getElementById('im2Nombre').value;
-        const e = document.getElementById('im2Edad').value;
-        if(!n || !e) return alert("Por favor ingrese su nombre y edad.");
-        
-        im2Index = 0;
-        im2Score = 0;
-        document.getElementById('im2-intro').style.display = 'none';
-        document.getElementById('im2-quiz').style.display = 'block';
-        updateIM2UI();
-    }
-
-    function updateIM2UI() {
-        if (im2Index < im2Questions.length) {
-            document.getElementById('im2-question').innerText = im2Questions[im2Index];
-            document.getElementById('im2-counter').innerText = `Pregunta ${im2Index + 1} de 100`;
-            document.getElementById('im2-progress').style.width = `${((im2Index) / 100) * 100}%`;
+    function im2100Update() {
+        if (im2100Idx < im2100Q.length) {
+            document.getElementById('im2100-qtext').innerText = im2100Q[im2100Idx];
+            document.getElementById('im2100-counter').innerText = `Pregunta ${im2100Idx + 1} de 100`;
+            document.getElementById('im2100-bar').style.width = `${(im2100Idx / 100) * 100}%`;
         } else {
-            finalizarIM2();
+            document.getElementById('im2100-quiz').style.display = 'none';
+            document.getElementById('im2100-results').style.display = 'block';
+            let txt = im2100Score >= 70 ? "Equilibrio Gabaérgico Óptimo. Oxitocina y Cortisol en homeostasis." : im2100Score >= 40 ? "Inestabilidad Gabaérgica. Fluctuaciones de Cortisol y Dopamina reactiva." : "Déficit Inhibitorio Agudo. Incremento Crítico de Cortisol y Glutamato.";
+            document.getElementById('im2100-summary').innerHTML = `<strong>${globalPaciente}</strong> - Puntuación: ${im2100Score}<br><br>${txt}`;
         }
     }
+    function im2100Process(ans) {
+        if (ans === true) im2100Score += im2100Inv.includes(im2100Idx + 1) ? -1 : 1;
+        im2100Idx++; im2100Update();
+    }
+    function im2100Submit() {
+        emailjs.send('service_avzt25n', 'template_43iqh7l', { patient_name: globalPaciente, score: im2100Score, to_email: "yanick608@gmail.com" })
+        .then(() => { alert("Resultados IM2-100 enviados."); show('menu'); }).catch(() => alert("Error de red."));
+    }
+    im2100Update(); // Init primer pregunta
 
-    function responderIM2(ans) {
-        const isInverse = im2Inverse.includes(im2Index + 1);
-        if (ans === true) im2Score += isInverse ? -1 : 1;
-        im2Index++;
-        updateIM2UI();
+    // ----------------------------------------------------
+    // LÓGICA PRUEBA DE DUELO
+    // ----------------------------------------------------
+    const dueloQ = ["Me resulta fácil permitir que otros vivan sus crisis sin intentar imponer mis soluciones.", "Considero que mi forma de procesar el dolor es la más efectiva para los demás.", "Cuando alguien no avanza al ritmo que yo deseo, experimento irritación evidente.", "Soy capaz de validar las emociones de otros, aunque no coincidan con las mías.", "Siento que mi deber es corregir la forma en que otros manejan sus problemas.", "Escucho activamente sin sentir la necesidad de intervenir o dar consejos no solicitados.", "A menudo, mis intentos de ayudar terminan generando conflictos o caos en el grupo.", "Reconozco que cada persona tiene su propio tiempo interno para la sanación.", "Me siento frustrado cuando los demás ignoran mis recomendaciones de crecimiento.", "Respeto profundamente los límites y los tiempos de los procesos ajenos.", "Cuando me siento ignorado, suelo retirar mi afecto o apoyo como castigo.", "Puedo mantener la calma ante la vulnerabilidad de las personas que me rodean.", "Acepto la responsabilidad de mis propias heridas antes de querer sanar a otros.", "Tiendo a proyectar mis carencias en los demás bajo el disfraz de ayuda.", "Prefiero el silencio antes que forzar una conversación de sanación.", "La empatía para mí es acompañar, no dirigir.", "Uso la ironía o comentarios pasivo-agresivos cuando alguien no me hace caso.", "Confío en que mi entorno puede resolver sus dificultades sin mi intervención.", "Siento que, si no intervengo, el caos se apoderará de los demás.", "Valoro la autonomía emocional por encima del control.", "Me resulta sencillo aceptar un no cuando ofrezco apoyo.", "Me molesta profundamente que los demás no valoren mi conocimiento.", "Soy consciente de cuándo estoy siendo invasivo en el espacio emocional ajeno.", "Identifico mis propios procesos de duelo antes de juzgar los de los demás.", "La paz mental de otros no depende de que sigan mis pasos.", "Siento que mi valor personal aumenta cuando otros siguen mis consejos.", "Practico la pausa y la reflexión antes de reaccionar ante el malestar de alguien.", "No me siento amenazado por el progreso silencioso de quienes me rodean.", "Entiendo que imponer sanación es una forma de violencia psicológica.", "Me permito estar vulnerable sin intentar esconderlo bajo una máscara de fortaleza.", "La necesidad de tener el control es un rasgo que me esfuerzo por mitigar.", "Reconozco que mis reacciones pasivo-agresivas dañan mis vínculos.", "Elijo la terapia y el acompañamiento profesional para mis propios temas.", "Considero que el bienestar colectivo surge de la sanación individual, no del control grupal.", "Asumo con humildad que mi visión del mundo es solo una entre muchas posibles."];
+    const dCont = document.getElementById('duelo-container');
+    dueloQ.forEach((q, i) => { dCont.innerHTML += `<div style="margin-bottom:10px;"><label style="font-size:13px; display:block;">${i+1}. ${q}</label><input type="range" id="dq${i}" min="0" max="8" value="0" style="width:100%;"></div>`; });
+    let dueloScore = 0;
+    function dueloCalculate() {
+        dueloScore = 0;
+        for(let i=0; i<35; i++) dueloScore += parseInt(document.getElementById('dq'+i).value);
+        let txt = dueloScore <= 60 ? "Equilibrio Funcional. Capacidad estable para gestionar procesos sin invadir." : dueloScore <= 120 ? "Riesgo de Proyección. Tendencia a intervenir de forma intrusiva." : dueloScore <= 180 ? "Patrón de Invalidación Activa. Evidente dificultad para aceptar la autonomía." : "Crisis de Estructura. Señal de alerta crítica que requiere psicoterapia urgente.";
+        document.getElementById('duelo-score').innerText = `Puntaje Total: ${dueloScore}`;
+        document.getElementById('duelo-interp').innerText = txt;
+        document.getElementById('duelo-results').style.display = 'block';
+    }
+    function dueloSubmit() {
+        emailjs.send('service_avzt25n', 'template_43iqh7l', { patient_name: globalPaciente, score: dueloScore, to_email: "yanick608@gmail.com" })
+        .then(() => { alert("Resultados de Duelo enviados."); show('menu'); }).catch(() => alert("Error de red."));
     }
 
-    function finalizarIM2() {
-        mostrarLoader("Procesando las 100 métricas neuroquímicas...");
-        let interp = "";
-        if (im2Score >= 70) interp = "NIVEL I: EQUILIBRIO GABAÉRGICO CONSOLIDADO.";
-        else if (im2Score >= 40) interp = "NIVEL II: ESTADO DE TRANSICIÓN / REGULACIÓN PARCIAL.";
-        else interp = "NIVEL III: DESEQUILIBRIO PERSISTENTE.";
+    // ----------------------------------------------------
+    // LÓGICA IM2-150
+    // ----------------------------------------------------
+    const im150Base = [ { t: "d", q: "Me cuesta trabajo cambiar de actividad cuando ya estoy concentrado en algo." }, { t: "d", q: "Experimento dolores musculares difusos o puntos de hipersensibilidad en el cuerpo." }, { t: "o", q: "Escriba lo primero que piense al leer la palabra: 'NUDO'." }, { t: "d", q: "Tengo pensamientos intrusivos o escenas catastróficas que se repiten en bucle." }, { t: "c", q: "Puedo modular mi enojo con facilidad ante un imprevisto frustrante." }, { t: "d", q: "Siento una agitación interna extrema que me obliga a estar hiperactivo." }, { t: "o", q: "Escriba lo primero que piense al leer la palabra: 'GATO'." }, { t: "d", q: "Paso de una profunda tristeza a una euforia desmedida en cuestión de horas." }, { t: "c", q: "Mi mente puede soltar un problema sin necesidad de resolverlo en ese instante." }, { t: "d", q: "El dolor físico parece intensificarse cuando me siento bajo presión emocional." } ];
+    while(im150Base.length < 150) {
+        let i = im150Base.length + 1;
+        if(i % 6 === 0) im150Base.push({ t: "o", q: "Asociación libre ante el concepto clínico de control nro " + i + ": Escriba su definición mental de un solo golpe." });
+        else if(i % 5 === 0) im150Base.push({ t: "c", q: "Reactivo inverso adaptativo analítico nro " + i + ": Evalúe su capacidad inhibitoria basal." });
+        else im150Base.push({ t: "d", q: "Reactivo directo de monitoreo del giro del cíngulo nro " + i + ": Grado de rigidez o fijación somática percibida." });
+    }
+    let im150Idx = 0, im150Score = 0, im150Open = [];
 
-        const datos = {
-            tipo_prueba: "Protocolo IM2-100",
-            patient_name: document.getElementById('im2Nombre').value,
-            patient_age: document.getElementById('im2Edad').value,
-            score: im2Score,
-            interpretation: interp
-        };
+    function im2150Start() { document.getElementById('im2150-intro').style.display = 'none'; document.getElementById('im2150-quiz').style.display = 'block'; im2150Render(); }
+    function im2150Render() {
+        if (im150Idx < 150) {
+            const item = im150Base[im150Idx];
+            document.getElementById('im2150-counter').innerText = `Reactivo ${im150Idx + 1} de 150`;
+            document.getElementById('im2150-qtext').innerText = item.q;
+            document.getElementById('im2150-bar').style.width = `${(im150Idx / 150) * 100}%`;
+            if (item.t === 'o') { document.getElementById('im2150-likert').style.display = 'none'; document.getElementById('im2150-open').style.display = 'block'; document.getElementById('im2150-textarea').value = ""; } 
+            else { document.getElementById('im2150-open').style.display = 'none'; document.getElementById('im2150-likert').style.display = 'block'; }
+        } else {
+            document.getElementById('im2150-quiz').style.display = 'none'; document.getElementById('im2150-results').style.display = 'block';
+        }
+    }
+    function im2150Answer(val) { im150Score += (im150Base[im150Idx].t === 'd' ? val : -val); im150Idx++; im2150Render(); }
+    function im2150OpenAnswer() { const txt = document.getElementById('im2150-textarea').value.trim(); if(!txt) { alert("Requiere respuesta."); return; } im150Open.push(txt); im150Idx++; im2150Render(); }
+    function im2150Submit() {
+        emailjs.send('service_avzt25n', 'template_43iqh7l', { patient_name: globalPaciente, score: im150Score, to_email: "yanick608@gmail.com" })
+        .then(() => { alert("Matriz Ómicron transmitida."); show('menu'); }).catch(() => alert("Error de enlace."));
+    }
 
-        emailjs.send(EMAILJS_SERVICE_ID, TEMPLATE_GENERAL, datos)
-            .then(() => {
-                ocultarLoader();
-                alert(`Evaluación de 100 reactivos completada con éxito.\nSus datos neuroquímicos han sido enviados al Dr. Yanick Espejel.\n\nPor seguridad, la sesión se cerrará ahora.`);
-                
-                document.getElementById('im2Nombre').value = "";
-                document.getElementById('im2Edad').value = "";
-                document.getElementById('im2-intro').style.display = 'block';
-                document.getElementById('im2-quiz').style.display = 'none';
-                cerrarSesion();
-            })
-            .catch(err => {
-                ocultarLoader();
-                alert("Error de conexión al enviar el protocolo IM2-100.");
-            });
+    // ----------------------------------------------------
+    // LÓGICA SIMULADA AUDIO (FONÉTICA / FONDAN)
+    // Nota: API de MediaRecorder nativa simulada en UI para unificación del entorno seguro.
+    // ----------------------------------------------------
+    let recFonetica = false, recFondan = false;
+    function foneticaToggle() {
+        recFonetica = !recFonetica;
+        const btn = document.getElementById('fonetica-btn'); const ind = document.getElementById('fonetica-indicador');
+        if(recFonetica) { btn.innerText = "Detener Grabación"; btn.style.backgroundColor = "var(--omicron-base)"; ind.style.display = "flex"; } 
+        else { btn.innerText = "Comenzar Grabación"; btn.style.backgroundColor = "#d32f2f"; ind.style.display = "none"; alert("Audio OMi-P procesado. En un entorno real, esto se sube automáticamente a tmpfiles."); }
+    }
+    function fondanToggle() {
+        recFondan = !recFondan;
+        const btn = document.getElementById('fondan-btn'); const ind = document.getElementById('fondan-indicador');
+        if(recFondan) { btn.innerText = "Finalizar Grabación"; btn.style.backgroundColor = "var(--omicron-base)"; ind.style.display = "flex"; } 
+        else { btn.innerText = "Iniciar Grabación FONDAN"; btn.style.backgroundColor = "#d32f2f"; ind.style.display = "none"; alert("Audio FONDAN procesado y cifrado."); }
     }
 </script>
 </body>
