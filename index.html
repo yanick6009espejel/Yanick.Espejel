@@ -12,24 +12,36 @@
             --rose-cuerpo: #C59D83; --rose-sombra: #A67C6D; --rose-reflejo: #F4DCD3; --destello: #FFFFFF;
         }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--destello); color: var(--omicron-base); margin: 0; padding: 20px; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; }
-        .container { width: 100%; max-width: 800px; background: var(--destello); padding: 40px; border-top: 8px solid var(--omicron-base); border-bottom: 3px solid var(--rose-cuerpo); border-radius: 8px; box-shadow: 0 10px 30px rgba(4, 41, 40, 0.06); box-sizing: border-box; }
+        .container { width: 100%; max-width: 900px; background: var(--destello); padding: 40px; border-top: 8px solid var(--omicron-base); border-bottom: 3px solid var(--rose-cuerpo); border-radius: 8px; box-shadow: 0 10px 30px rgba(4, 41, 40, 0.06); box-sizing: border-box; }
         .section { display: none; } .active { display: block; animation: fadeIn 0.3s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
         
         /* Componentes Globales */
-        h1 { color: var(--omicron-base); border-bottom: 2px solid var(--rose-cuerpo); padding-bottom: 10px; font-weight: 700; text-transform: uppercase; font-size: 24px; }
+        h1 { color: var(--omicron-base); border-bottom: 2px solid var(--rose-cuerpo); padding-bottom: 10px; font-weight: 700; text-transform: uppercase; font-size: 24px; margin-bottom: 20px; }
         h2 { color: var(--rose-sombra); font-size: 18px; text-transform: uppercase; margin-bottom: 15px; }
-        h3 { color: var(--omicron-base); font-size: 16px; border-bottom: 1px dashed var(--rose-cuerpo); padding-bottom: 5px; margin-top: 25px; }
-        input[type="text"], input[type="password"], input[type="number"], input[type="email"], input[type="tel"], input[type="date"], textarea, select { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid var(--rose-cuerpo); border-radius: 4px; box-sizing: border-box; outline: none; background-color: var(--destello); color: var(--omicron-sombra); font-family: inherit; font-size: 14px; }
-        input:focus, textarea:focus { border-color: var(--omicron-base); box-shadow: 0 0 5px rgba(6, 61, 59, 0.2); }
+        h3 { color: var(--omicron-base); font-size: 18px; border-bottom: 1px dashed var(--rose-cuerpo); padding-bottom: 5px; margin-top: 30px; margin-bottom: 15px; font-weight: 600; }
+        
+        input[type="text"], input[type="password"], input[type="number"], input[type="email"], input[type="tel"], input[type="date"], textarea, select { 
+            width: 100%; padding: 12px; margin: 4px 0 12px 0; border: 1px solid var(--rose-cuerpo); border-radius: 4px; box-sizing: border-box; outline: none; background-color: var(--destello); color: var(--omicron-sombra); font-family: inherit; font-size: 14px; transition: border 0.3s;
+        }
+        input:focus, textarea:focus, select:focus { border-color: var(--omicron-base); box-shadow: 0 0 5px rgba(6, 61, 59, 0.2); }
+        label { font-size: 13px; font-weight: 600; color: var(--omicron-base); margin-bottom: 2px; display: block; }
+        
         button { width: 100%; padding: 15px; background: var(--omicron-base); color: var(--destello); border: none; border-radius: 4px; cursor: pointer; text-transform: uppercase; font-weight: bold; margin-top: 15px; transition: background 0.3s; }
         button:hover { background: var(--omicron-sombra); }
         .btn-secondary { background: var(--destello); color: var(--rose-sombra); border: 1px solid var(--rose-sombra); }
         .btn-secondary:hover { background: var(--rose-reflejo); color: var(--omicron-base); }
+        
         .menu-item { padding: 20px; border-bottom: 1px solid var(--rose-reflejo); cursor: pointer; font-weight: 600; text-transform: uppercase; font-size: 14px; transition: color 0.2s; }
         .menu-item:hover { color: var(--rose-sombra); background-color: #FAFAFA; }
-        .instructions-box, .consent-box { background-color: var(--rose-reflejo); padding: 20px; border-left: 4px solid var(--omicron-base); border-radius: 4px; font-size: 14px; line-height: 1.6; margin-bottom: 25px; color: var(--omicron-sombra); text-align: justify; }
         
+        .instructions-box, .consent-box { background-color: var(--rose-reflejo); padding: 20px; border-left: 4px solid var(--omicron-base); border-radius: 4px; font-size: 14px; line-height: 1.6; margin-bottom: 25px; color: var(--omicron-sombra); text-align: justify; }
+        .alert-box { background-color: #fef2f2; border-left: 4px solid #dc2626; color: #991b1b; padding: 15px; border-radius: 4px; font-size: 13px; margin-bottom: 20px; }
+        
+        /* Modificadores Dinámicos de HC */
+        .hc-dynamic { display: none; }
+        .hc-dynamic.show { display: block; animation: fadeIn 0.4s ease; }
+
         /* Estilos IM2-150 y Likert */
         .progress-container { width: 100%; height: 6px; background-color: var(--rose-reflejo); border-radius: 3px; margin-bottom: 20px; overflow: hidden; }
         .progress-bar { height: 100%; width: 0%; background-color: var(--omicron-base); transition: width 0.3s ease; }
@@ -51,18 +63,18 @@
     <div id="login" class="section active">
         <h1>Identificación Clínica</h1>
         <div class="instructions-box">Ingrese su nombre de usuario y credencial de acceso para ingresar al ecosistema de evaluación OMi-P.</div>
-        <label style="font-size: 12px; font-weight: bold; text-transform: uppercase;">Nombre de Usuario / Paciente</label>
+        <label>NOMBRE DE USUARIO / PACIENTE</label>
         <input type="text" id="global-nombre" placeholder="Nombre completo">
-        <label style="font-size: 12px; font-weight: bold; text-transform: uppercase; margin-top: 10px;">Clave de Acceso</label>
+        <label>CLAVE DE ACCESO</label>
         <input type="password" id="global-pass" placeholder="Contraseña de Seguridad">
         <button onclick="validarAcceso()">Ingresar al Sistema</button>
     </div>
 
     <!-- MENU CENTRAL -->
     <div id="menu" class="section">
-        <h3 id="display-nombre" style="margin-top: 0; color: var(--rose-sombra);"></h3>
+        <h3 id="display-nombre" style="margin-top: 0; color: var(--rose-sombra); border:none;"></h3>
         <h1>Ecosistema OMi-P</h1>
-        <div class="menu-item" onclick="show('historia')">Historia Clínica</div>
+        <div class="menu-item" onclick="show('historia')">Historia Clínica General (Epigenética)</div>
         <div class="menu-item" onclick="show('im2100')">Protocolo IM2-100</div>
         <div class="menu-item" onclick="show('duelo')">Prueba de Duelo</div>
         <div class="menu-item" onclick="show('im2150')">Protocolo IM2-150 (Diagnóstico Diferencial)</div>
@@ -71,29 +83,152 @@
         <button class="btn-secondary" onclick="location.reload()">Cerrar Sesión</button>
     </div>
 
-    <!-- 1. HISTORIA CLÍNICA -->
+    <!-- 1. HISTORIA CLÍNICA DINÁMICA -->
     <div id="historia" class="section">
-        <h1>Ficha Clínica Integral</h1>
-        <div class="instructions-box">El presente documento es un formato integral requerido para la apertura de expediente clínico. Es indispensable llenarlo con precisión.</div>
-        <div style="background-color: var(--omicron-base); color: white; padding: 20px; border-radius: 6px; margin-bottom: 20px; border: 2px solid var(--rose-cuerpo);">
-            <h3 style="color: var(--rose-cuerpo); margin-top: 0; border-bottom: 1px solid var(--rose-sombra);">Información de Pago</h3>
-            <p style="font-size: 14px;"><strong>Titular:</strong> YANICK ESPEJEL GARCÍA<br><strong>Banco:</strong> Santander STP<br><strong>Cuenta:</strong> 4001449239<br><strong>CLABE:</strong> 646180401614492398<br><strong>Correo:</strong> yanick608@gmail.com</p>
+        <h1>Expediente Clínico General</h1>
+        
+        <!-- Bloque de Advertencia Clínica -->
+        <div class="alert-box">
+            <strong>⚠️ AVISO IMPORTANTE PARA EL LLENADO</strong><br><br>
+            <ul style="list-style-type: disc; padding-left: 20px; margin-top: 5px;">
+                <li><strong>Configuración dinámica:</strong> Por favor, seleccione primero el rango de edad del paciente. El formulario se adaptará para mostrar solo las preguntas relevantes.</li>
+                <li><strong>Regla de veracidad:</strong> Es vital para el cruce epigenético que la información sea precisa. Si desconoce algún dato, deje el espacio en blanco o escriba <i>"Desconozco"</i>. <strong>NO INVENTE DATOS.</strong></li>
+            </ul>
         </div>
-        <form id="form-historia" onsubmit="enviarHistoria(event)">
-            <h3>Datos de Identificación</h3>
-            <input type="text" id="hc-nombre" placeholder="Nombre Completo" required>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                <input type="number" id="hc-edad" placeholder="Edad" required>
-                <input type="text" id="hc-sexo" placeholder="Sexo" required>
-                <input type="tel" id="hc-tel" placeholder="Teléfono" required>
-                <input type="email" id="hc-correo" placeholder="Correo" required>
+
+        <form id="form-historia" onsubmit="enviarHistoriaExpandida(event)">
+            
+            <div style="background-color: var(--rose-reflejo); padding: 20px; border-radius: 6px; border: 1px solid var(--rose-cuerpo); margin-bottom: 20px;">
+                <label style="font-size: 15px;">¿En qué etapa de desarrollo se encuentra el paciente a evaluar? *</label>
+                <select id="hc-rango-edad" onchange="adaptarFormulario()" required style="font-size: 16px; font-weight: bold;">
+                    <option value="">Seleccione una opción para configurar el expediente...</option>
+                    <option value="infante">Infante / Niño (0 a 11 años)</option>
+                    <option value="adolescente">Adolescente (12 a 17 años)</option>
+                    <option value="adulto">Adulto (18+ años)</option>
+                </select>
             </div>
-            <h3>Motivo de Consulta</h3>
-            <textarea id="hc-motivo" rows="3" required></textarea>
-            <h3>Antecedentes</h3>
-            <textarea id="hc-med" rows="2" placeholder="Medicación psiquiátrica actual (Dosis/Institución)"></textarea>
-            <button type="submit">Enviar Registro</button>
-            <button type="button" class="btn-secondary" onclick="show('menu')">Volver al Menú</button>
+
+            <!-- BLOQUE I. IDENTIFICACIÓN GENERAL (Para todos) -->
+            <div id="bloque-general" class="hc-dynamic">
+                <h3>I. Datos Generales de Identificación</h3>
+                <label>Nombre completo del paciente *</label>
+                <input type="text" id="hc-nombre" required>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div><label>Fecha de nacimiento *</label><input type="date" id="hc-fecha-nac" required></div>
+                    <div><label>Edad cronológica actual *</label><input type="text" id="hc-edad" placeholder="Ej. 13 años, 2 meses" required></div>
+                    <div>
+                        <label>Sexo biológico *</label>
+                        <select id="hc-sexo" required>
+                            <option value="">Seleccione...</option>
+                            <option value="Masculino">Masculino</option>
+                            <option value="Femenino">Femenino</option>
+                        </select>
+                    </div>
+                    <div><label>Lugar de nacimiento</label><input type="text" id="hc-lugar-nac"></div>
+                </div>
+
+                <!-- SUB-BLOQUE: TUTOR (Se muestra para Infantes y Adolescentes) -->
+                <div id="bloque-tutor" class="bg-gray-50 p-4 rounded-md border border-gray-200 mt-4 hc-dynamic">
+                    <p class="text-sm font-bold text-gray-700 mb-3 uppercase">Datos del Responsable Legal / Acompañante</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div><label>Nombre del Responsable 1</label><input type="text" id="hc-tutor1"></div>
+                        <div><label>Parentesco y Ocupación</label><input type="text" id="hc-ocupacion1" placeholder="Ej. Madre - Contadora"></div>
+                        <div><label>Nombre del Responsable 2 (Opcional)</label><input type="text" id="hc-tutor2"></div>
+                        <div><label>Parentesco y Ocupación</label><input type="text" id="hc-ocupacion2"></div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                    <div><label>Teléfono de contacto (WhatsApp) *</label><input type="tel" id="hc-tel" required></div>
+                    <div><label>Correo electrónico principal *</label><input type="email" id="hc-correo" required></div>
+                </div>
+
+                <h3>II. Motivo de Consulta e Historial Médico (General)</h3>
+                <label>Motivo principal de consulta * (Describa detalladamente)</label>
+                <textarea id="hc-motivo" rows="3" required></textarea>
+                
+                <label>Historial de Enfermedades, alergias, o traumatismos importantes:</label>
+                <textarea id="hc-enfermedades" rows="2"></textarea>
+                
+                <label>Medicación psiquiátrica o general actual (Nombre y dosis):</label>
+                <textarea id="hc-med" rows="2"></textarea>
+
+                <h3>III. Antecedentes Epigenéticos / Familiares</h3>
+                <label>Enfermedades psiquiátricas, neurológicas o adicciones en la familia biológica (Especifique parentesco):</label>
+                <textarea id="hc-epigenetica" rows="3" placeholder="Ej. Abuelo paterno - Alcoholismo. Madre - Depresión."></textarea>
+            </div>
+
+            <!-- BLOQUE IV: INFANTES Y NIÑOS (0 - 11) -->
+            <div id="bloque-infante" class="hc-dynamic">
+                <h3>IV. Desarrollo Perinatal e Infancia Temprana</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label>Características del embarazo</label>
+                        <select id="hi-embarazo">
+                            <option value="">Seleccione...</option>
+                            <option value="Normoevolutivo (Sin riesgo)">Normoevolutivo (Sin riesgo)</option>
+                            <option value="De alto riesgo / Complicaciones">De alto riesgo / Complicaciones</option>
+                            <option value="Desconozco">Desconozco</option>
+                        </select>
+                    </div>
+                    <div><label>Semanas de gestación al nacer</label><input type="text" id="hi-semanas"></div>
+                </div>
+                <label>Complicaciones en embarazo o parto (Incubadora, sufrimiento fetal, preeclampsia, etc.):</label>
+                <textarea id="hi-complicaciones" rows="2"></textarea>
+
+                <p class="text-xs text-gray-500 mb-3 mt-4">Indique edades de hitos del desarrollo. (Si no sabe, escriba "Desconozco")</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div><label>Edad en que sostuvo la cabeza:</label><input type="text" id="hi-cabeza"></div>
+                    <div><label>Edad en que gateó:</label><input type="text" id="hi-gateo"></div>
+                    <div><label>Edad en que caminó sin apoyo:</label><input type="text" id="hi-camino"></div>
+                    <div><label>Edad de primeras palabras:</label><input type="text" id="hi-hablo"></div>
+                    <div><label>Control de esfínteres (pañal):</label><input type="text" id="hi-esfinter"></div>
+                </div>
+                
+                <label class="mt-4">Socialización y Conducta escolar (Describa adaptación, conducta y aprendizaje actual):</label>
+                <textarea id="hi-escuela" rows="2"></textarea>
+            </div>
+
+            <!-- BLOQUE V: ADOLESCENTES (12 - 17) -->
+            <div id="bloque-adolescente" class="hc-dynamic">
+                <h3>V. Dinámica Adolescente y Conductual</h3>
+                <label>Desempeño y adaptación académica actual:</label>
+                <textarea id="ha-academico" rows="2" placeholder="Promedio aproximado, dificultades de atención, reportes conductuales..."></textarea>
+                
+                <label>Socialización y Dinámica con pares (Amigos, aislamiento, bullying):</label>
+                <textarea id="ha-social" rows="2"></textarea>
+                
+                <label>Relación con la autoridad y en casa (Conflictos, límites, rebeldía):</label>
+                <textarea id="ha-autoridad" rows="2"></textarea>
+
+                <label>Conductas de riesgo o señales de alerta (Uso excesivo de pantallas, autolesiones, sospecha de consumo de sustancias, alteraciones del sueño):</label>
+                <textarea id="ha-riesgos" rows="3"></textarea>
+            </div>
+
+            <!-- BLOQUE VI: ADULTOS (18+) -->
+            <div id="bloque-adulto" class="hc-dynamic">
+                <h3>VI. Vida Adulta, Autonomía y Psicosocial</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <div><label>Estado civil / Situación de pareja</label><input type="text" id="hu-civil"></div>
+                    <div><label>Ocupación principal actual</label><input type="text" id="hu-ocupacion"></div>
+                </div>
+                
+                <label>Describa su dinámica de vida diaria y autonomía (Quiénes viven en su domicilio, nivel de estrés laboral/doméstico):</label>
+                <textarea id="hu-dinamica" rows="2"></textarea>
+                
+                <label>Hábitos de consumo (Alcohol, tabaco, sustancias recreativas - Indique frecuencia):</label>
+                <textarea id="hu-sustancias" rows="2"></textarea>
+                
+                <label>Calidad del sueño y hábitos alimenticios actuales:</label>
+                <textarea id="hu-habitos" rows="2"></textarea>
+            </div>
+
+            <!-- BOTÓN DE ENVÍO -->
+            <div id="bloque-submit" class="hc-dynamic mt-6">
+                <button type="submit" id="btn-submit-hc">Procesar y Enviar a Archivo Clínico</button>
+                <button type="button" class="btn-secondary" onclick="show('menu')">Volver al Menú</button>
+            </div>
         </form>
     </div>
 
@@ -240,25 +375,106 @@
     }
 
     // ----------------------------------------------------
-    // LÓGICA HISTORIA CLÍNICA
+    // LÓGICA DE HISTORIA CLÍNICA DINÁMICA
     // ----------------------------------------------------
-    function enviarHistoria(e) {
+    function adaptarFormulario() {
+        const rango = document.getElementById('hc-rango-edad').value;
+        
+        // Ocultar todo primero
+        document.querySelectorAll('.hc-dynamic').forEach(el => el.classList.remove('show'));
+        
+        if (rango === 'infante') {
+            document.getElementById('bloque-general').classList.add('show');
+            document.getElementById('bloque-tutor').classList.add('show');
+            document.getElementById('bloque-infante').classList.add('show');
+            document.getElementById('bloque-submit').classList.add('show');
+        } else if (rango === 'adolescente') {
+            document.getElementById('bloque-general').classList.add('show');
+            document.getElementById('bloque-tutor').classList.add('show');
+            document.getElementById('bloque-adolescente').classList.add('show');
+            document.getElementById('bloque-submit').classList.add('show');
+        } else if (rango === 'adulto') {
+            document.getElementById('bloque-general').classList.add('show');
+            // El tutor no se muestra para adultos
+            document.getElementById('bloque-adulto').classList.add('show');
+            document.getElementById('bloque-submit').classList.add('show');
+        }
+    }
+
+    function getVal(id) { return document.getElementById(id).value.trim() || 'N/A'; }
+
+    function enviarHistoriaExpandida(e) {
         e.preventDefault();
-        const btn = e.submitter;
-        btn.innerText = "Procesando...";
+        const btn = document.getElementById('btn-submit-hc');
+        btn.innerText = "Procesando Datos Epigenéticos...";
         btn.disabled = true;
+
+        const rango = document.getElementById('hc-rango-edad').value;
+        let reporte = `
+=== I. IDENTIFICACIÓN GENERAL ===
+Paciente: ${getVal('hc-nombre')} | F. Nac: ${getVal('hc-fecha-nac')} | Edad: ${getVal('hc-edad')} | Sexo: ${getVal('hc-sexo')}
+Lugar Nac: ${getVal('hc-lugar-nac')} | Rango: ${rango.toUpperCase()}`;
+
+        if (rango === 'infante' || rango === 'adolescente') {
+            reporte += `
+Responsable 1: ${getVal('hc-tutor1')} (${getVal('hc-ocupacion1')})
+Responsable 2: ${getVal('hc-tutor2')} (${getVal('hc-ocupacion2')})`;
+        }
+
+        reporte += `
+=== II. MOTIVO Y MÉDICO ===
+Motivo Consulta: ${getVal('hc-motivo')}
+Enfermedades: ${getVal('hc-enfermedades')}
+Medicación: ${getVal('hc-med')}
+
+=== III. MAPEO EPIGENÉTICO/FAMILIAR ===
+Antecedentes Familiares: ${getVal('hc-epigenetica')}
+`;
+
+        if (rango === 'infante') {
+            reporte += `
+=== IV. INFANCIA TEMPRANA ===
+Embarazo: ${getVal('hi-embarazo')} | Semanas: ${getVal('hi-semanas')}
+Complicaciones: ${getVal('hi-complicaciones')}
+Hitos - Cabeza: ${getVal('hi-cabeza')} | Gateo: ${getVal('hi-gateo')} | Caminó: ${getVal('hi-camino')} 
+Hitos - Lenguaje: ${getVal('hi-hablo')} | Esfínteres: ${getVal('hi-esfinter')}
+Área Escolar: ${getVal('hi-escuela')}
+`;
+        } else if (rango === 'adolescente') {
+            reporte += `
+=== V. DINÁMICA ADOLESCENTE ===
+Desempeño Académico: ${getVal('ha-academico')}
+Socialización: ${getVal('ha-social')}
+Dinámica Autoridad: ${getVal('ha-autoridad')}
+Riesgos detectados: ${getVal('ha-riesgos')}
+`;
+        } else if (rango === 'adulto') {
+            reporte += `
+=== VI. VIDA ADULTA ===
+Estado Civil: ${getVal('hu-civil')} | Ocupación: ${getVal('hu-ocupacion')}
+Dinámica/Autonomía: ${getVal('hu-dinamica')}
+Sustancias/Adicciones: ${getVal('hu-sustancias')}
+Sueño y Hábitos: ${getVal('hu-habitos')}
+`;
+        }
+
+        // Mapeo hacia la estructura que ya tenías en EmailJS
         const datos = {
-            nombre: document.getElementById('hc-nombre').value, edad: document.getElementById('hc-edad').value,
-            telefono: document.getElementById('hc-tel').value, motivo: document.getElementById('hc-motivo').value,
-            medicacion: document.getElementById('hc-med').value || 'Ninguna', to_email: "yanick608@gmail.com"
+            nombre: getVal('hc-nombre'), 
+            edad: getVal('hc-edad'),
+            telefono: getVal('hc-tel') + " | Correo: " + getVal('hc-correo'), 
+            motivo: reporte.trim(), // Aquí viaja toda la matriz condensada según la edad
+            medicacion: getVal('hc-med'), 
+            to_email: "yanick608@gmail.com"
         };
+
         emailjs.send("service_avzt25n", "template_43iqh7l", datos).then(() => {
-            alert("Registro Completado. Datos enviados exitosamente.");
+            alert("Expediente Clínico Dinámico Enviado al Archivo Epigenético OMi-P.");
             show('menu');
-            btn.innerText = "Enviar Registro"; btn.disabled = false;
+            btn.innerText = "Procesar y Enviar a Archivo Clínico"; btn.disabled = false;
         }).catch(() => {
             alert("Error de conexión. Contacte a Yanick Espejel al 55 4589 4672.");
-            btn.innerText = "Enviar Registro"; btn.disabled = false;
+            btn.innerText = "Procesar y Enviar a Archivo Clínico"; btn.disabled = false;
         });
     }
 
@@ -289,7 +505,7 @@
         emailjs.send('service_avzt25n', 'template_43iqh7l', { patient_name: globalPaciente, score: im2100Score, to_email: "yanick608@gmail.com" })
         .then(() => { alert("Resultados IM2-100 enviados."); show('menu'); }).catch(() => alert("Error de red."));
     }
-    im2100Update(); // Init primer pregunta
+    im2100Update();
 
     // ----------------------------------------------------
     // LÓGICA PRUEBA DE DUELO
@@ -345,14 +561,13 @@
 
     // ----------------------------------------------------
     // LÓGICA SIMULADA AUDIO (FONÉTICA / FONDAN)
-    // Nota: API de MediaRecorder nativa simulada en UI para unificación del entorno seguro.
     // ----------------------------------------------------
     let recFonetica = false, recFondan = false;
     function foneticaToggle() {
         recFonetica = !recFonetica;
         const btn = document.getElementById('fonetica-btn'); const ind = document.getElementById('fonetica-indicador');
         if(recFonetica) { btn.innerText = "Detener Grabación"; btn.style.backgroundColor = "var(--omicron-base)"; ind.style.display = "flex"; } 
-        else { btn.innerText = "Comenzar Grabación"; btn.style.backgroundColor = "#d32f2f"; ind.style.display = "none"; alert("Audio OMi-P procesado. En un entorno real, esto se sube automáticamente a tmpfiles."); }
+        else { btn.innerText = "Comenzar Grabación"; btn.style.backgroundColor = "#d32f2f"; ind.style.display = "none"; alert("Audio OMi-P procesado."); }
     }
     function fondanToggle() {
         recFondan = !recFondan;
@@ -363,3 +578,5 @@
 </script>
 </body>
 </html>
+
+
